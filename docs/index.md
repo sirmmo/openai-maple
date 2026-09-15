@@ -14,7 +14,7 @@ resp = client.chat.completions.create(
     model="maple-preview",
     messages=[{"role": "user", "content": "What is 17 * 23?"}],
 )
-print(resp.choices[0].message.content)                           # "391"
+print(resp.choices[0].message.content)  # "391"
 print(resp.choices[0].message.model_extra["reasoning_content"])  # the <think> trace
 ```
 
