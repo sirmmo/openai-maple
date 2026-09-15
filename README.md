@@ -55,7 +55,7 @@ already have.
 # 1. torch for your hardware
 pip install torch --index-url https://download.pytorch.org/whl/cpu   # or plain `pip install torch` for CUDA
 # 2. the server
-pip install -e .
+pip install openai-maple          # or `pip install -e .` from a clone
 openai-maple --port 8000
 ```
 
