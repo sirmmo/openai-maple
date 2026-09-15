@@ -10,3 +10,6 @@ examples/
 .env
 cache/
 .local/
+site/
+docs/
+mkdocs.yml

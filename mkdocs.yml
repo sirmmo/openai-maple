@@ -1,0 +1,58 @@
+site_name: openai-maple
+site_description: OpenAI-compatible HTTP API for the deepgrove/maple-preview reasoning model
+site_url: https://ingmmo.com/openai-maple/
+repo_url: https://github.com/sirmmo/openai-maple
+repo_name: sirmmo/openai-maple
+edit_uri: edit/main/docs/
+copyright: MIT licensed. Maple-Preview is published by DeepGrove under the MIT license.
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - toc.follow
+
+nav:
+  - Overview: index.md
+  - Quickstart: quickstart.md
+  - API reference: api-reference.md
+  - Configuration: configuration.md
+  - Architecture: architecture.md
+  - Development: development.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets

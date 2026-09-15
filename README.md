@@ -1,10 +1,17 @@
 # openai-maple
 
+[![CI](https://github.com/sirmmo/openai-maple/actions/workflows/ci.yml/badge.svg)](https://github.com/sirmmo/openai-maple/actions/workflows/ci.yml)
+[![Docs](https://github.com/sirmmo/openai-maple/actions/workflows/docs.yml/badge.svg)](https://ingmmo.com/openai-maple/)
+[![PyPI](https://img.shields.io/pypi/v/openai-maple)](https://pypi.org/project/openai-maple/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 An OpenAI-compatible HTTP API in front of
 [deepgrove/maple-preview](https://huggingface.co/deepgrove/maple-preview), the
 20B-A1B ternary-weight reasoning model. Point any OpenAI client at it and get
 `chat.completions` with `reasoning_content`, streaming, tool calls and the
 legacy `completions` endpoint.
+
+📖 **[Full documentation](https://ingmmo.com/openai-maple/)**
 
 ```python
 from openai import OpenAI
