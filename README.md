@@ -28,9 +28,21 @@ CPU, Apple Silicon, or a CUDA box without the flash-attn wheel**. With a real
 
 ### Docker
 
+Images are published to GHCR on every push to `main` (`latest`, `sha-…`) and
+on version tags (`1.2.3`, `1.2`): `ghcr.io/sirmmo/openai-maple` for CPU
+(amd64 + arm64) and the `-cuda` suffix (`latest-cuda`, `1.2.3-cuda`) for CUDA 12.4.
+
+```bash
+docker run -d -p 8000:8000 -v maple-cache:/cache/huggingface ghcr.io/sirmmo/openai-maple:latest
+# GPU:
+docker run -d --gpus all -p 8000:8000 -v maple-cache:/cache/huggingface ghcr.io/sirmmo/openai-maple:latest-cuda
+curl -s localhost:8000/health   # "loading" until the weights are in RAM, then "ok"
+```
+
+Or build locally from a clone:
+
 ```bash
 docker compose up -d           # CPU image; see docker-compose.yml for the GPU knobs
-curl -s localhost:8000/health   # "loading" until the weights are in RAM, then "ok"
 ```
 
 First start downloads ~40 GB of bf16 safetensors into the `maple-cache`
