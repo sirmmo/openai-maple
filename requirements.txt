@@ -1,0 +1,10 @@
+# Runtime dependencies. Install torch separately for your hardware first:
+#   CPU:  pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   CUDA: pip install torch   (default index ships CUDA wheels)
+torch>=2.4
+transformers>=4.57,<5
+accelerate>=1.0
+huggingface_hub>=0.23
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.6

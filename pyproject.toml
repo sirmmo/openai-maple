@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openai-maple"
+version = "0.1.0"
+description = "OpenAI-compatible HTTP API for the deepgrove/maple-preview reasoning model"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["openai", "openai-api", "maple", "deepgrove", "llm", "reasoning", "transformers"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
+
+# torch is deliberately not pinned to a CPU or CUDA build; install the wheel
+# that matches your hardware first (see README), then this package.
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.57,<5",
+    "accelerate>=1.0",
+    "huggingface_hub>=0.23",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "httpx>=0.27", "openai>=1.40"]
+
+[project.scripts]
+openai-maple = "openai_maple.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["openai_maple*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "network: builds a tiny model from the HF-hosted custom code (few MB download, cached)",
+    "live: runs against a server serving the real model (set OPENAI_MAPLE_URL)",
+]
+addopts = "-m 'not network and not live'"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["openai_maple", "conftest", "fakes"]

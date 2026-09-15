@@ -1,0 +1,38 @@
+services:
+  openai-maple:
+    build:
+      context: .
+      args:
+        # CPU wheels by default; set to a CUDA index (e.g. .../whl/cu124) for GPU.
+        TORCH_INDEX: "${TORCH_INDEX:-https://download.pytorch.org/whl/cpu}"
+    image: openai-maple:0.1.0
+    ports:
+      - "${MAPLE_PORT:-8000}:8000"
+    environment:
+      MAPLE_API_KEY: "${MAPLE_API_KEY:-}"
+      MAPLE_MODEL_PATH: "${MAPLE_MODEL_PATH:-deepgrove/maple-preview}"
+      MAPLE_MODEL_ID: "${MAPLE_MODEL_ID:-maple-preview}"
+      MAPLE_DEVICE: "${MAPLE_DEVICE:-auto}"
+      MAPLE_DTYPE: "${MAPLE_DTYPE:-auto}"
+      MAPLE_TORCH_THREADS: "${MAPLE_TORCH_THREADS:-0}"
+      MAPLE_MAX_NEW_TOKENS: "${MAPLE_MAX_NEW_TOKENS:-4096}"
+      MAPLE_ENABLE_THINKING: "${MAPLE_ENABLE_THINKING:-true}"
+      HF_TOKEN: "${HF_TOKEN:-}"
+    volumes:
+      # Persist the 40GB download across restarts. Point this at an existing
+      # ~/.cache/huggingface to reuse weights you already have.
+      - ${HF_CACHE_DIR:-maple-cache}:/cache/huggingface
+    restart: unless-stopped
+    # bf16 weights are ~40GB; leave headroom for the KV cache of long reasoning.
+    mem_limit: 64g
+    # Uncomment for a GPU build:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+volumes:
+  maple-cache:
